@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Santi Birreria - Proposal & Redesign Live Showcase</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                            950: '#451a03',
+                        },
+                        pubDark: '#0e0b07',
+                        pubCard: '#18130d',
+                        pubBorder: '#2d2319',
+                        foam: '#f8f4eb',
+                        hopGreen: '#3e5c38'
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        serifHeading: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styling & Micro-interactions */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0e0b07;
+            color: #f8f4eb;
+            overflow-x: hidden;
+        }
+
+        .font-brand {
+            font-family: 'Cinzel', serif;
+        }
+
+        .hero-bg {
+            background: linear-gradient(180deg, rgba(14, 11, 7, 0.75) 0%, rgba(14, 11, 7, 0.98) 100%),
+                        url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+
+        .pub-glass-card {
+            background: rgba(24, 19, 13, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(217, 119, 6, 0.2);
+        }
+
+        .pub-glass-card:hover {
+            border-color: rgba(245, 158, 11, 0.45);
+        }
+
+        .amber-glow-text {
+            text-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0e0b07;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d2319;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d97706;
+        }
+
+        .filter-btn.active {
+            background-color: #b45309;
+            color: #ffffff;
+            border-color: #f59e0b;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-amber-600 selection:text-black">
+
+    <!-- NAVBAR UFFICIALE -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-pubDark/95 backdrop-blur-md border-b border-pubBorder px-4 lg:px-8 py-4 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-amber-900 flex items-center justify-center text-pubDark font-bold text-xl border border-amber-400 shadow-md">
+                    <i class="fa-solid fa-beer-mug-empty"></i>
+                </div>
+                <div>
+                    <span class="font-brand text-xl font-extrabold tracking-wider text-amber-500 block leading-tight">I SANTI</span>
+                    <span class="text-[10px] text-amber-200/70 tracking-widest uppercase block">Birreria & Kitchen</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links (Desktop) -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#taps" class="text-gray-300 hover:text-amber-400 transition-colors">Spine & Birre</a>
+                <a href="#menu-section" class="text-gray-300 hover:text-amber-400 transition-colors">Il Menù</a>
+                <a href="#chi-siamo" class="text-gray-300 hover:text-amber-400 transition-colors">Chi Siamo</a>
+                <a href="#eventi" class="text-gray-300 hover:text-amber-400 transition-colors">Eventi & Sport</a>
+                <a href="#contatti" class="text-gray-300 hover:text-amber-400 transition-colors">Dove Siamo</a>
+            </nav>
+
+            <!-- Quick Action Calls -->
+            <div class="hidden sm:flex items-center gap-3">
+                <a href="tel:+390734902181" class="bg-amber-600 hover:bg-amber-500 text-pubDark font-bold px-4 py-2 rounded-lg text-sm transition-all flex items-center gap-2 shadow-lg">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>Chiama Ora</span>
+                </a>
+            </div>
+
+            <!-- Hamburger Button (Mobile) -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300 hover:text-amber-400 text-2xl">
+                <i class="fa-solid fa-bars" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 border-t border-pubBorder flex flex-col gap-4 text-center">
+            <a href="#taps" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-amber-400 text-sm py-1">Spine & Birre</a>
+            <a href="#menu-section" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-amber-400 text-sm py-1">Il Menù</a>
+            <a href="#chi-siamo" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-amber-400 text-sm py-1">Chi Siamo</a>
+            <a href="#eventi" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-amber-400 text-sm py-1">Eventi & Sport</a>
+            <a href="#contatti" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-amber-400 text-sm py-1">Dove Siamo</a>
+            <a href="tel:+390734902181" class="bg-amber-600 text-pubDark font-bold py-2.5 rounded-lg text-sm flex items-center justify-center gap-2 mt-2">
+                <i class="fa-solid fa-phone"></i>
+                <span>Chiama Ora: 0734 902181</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <div class="pt-20">
+
+        <!-- HERO SECTION -->
+        <section class="relative min-h-[85vh] flex items-center justify-center hero-bg border-b border-pubBorder px-4">
+            
+            <div class="relative z-10 text-center max-w-4xl mx-auto py-12">
+                
+                <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 px-4 py-1.5 rounded-full text-amber-400 text-xs font-semibold tracking-wider uppercase mb-6 backdrop-blur-md">
+                    <i class="fa-solid fa-location-dot"></i> Porto Sant'Elpidio (FM)
+                </div>
+
+                <h1 class="font-brand text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-foam mb-6 leading-tight">
+                    ARTIGIANALITÀ, PASSIONE <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 amber-glow-text">
+                        E BUONA COMPAGNIA
+                    </span>
+                </h1>
+
+                <p class="text-gray-300 text-base sm:text-xl font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Le migliori birre alla spina da tutto il mondo, hamburger gourmet a km zero e pizze ad alta digeribilità nel cuore della costa marchigiana.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#menu-section" class="w-full sm:w-auto bg-amber-600 hover:bg-amber-500 text-pubDark font-extrabold px-8 py-4 rounded-xl text-base transition-all shadow-lg hover:shadow-amber-600/40 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-utensils"></i>
+                        <span>Esplora il Menù Cibo</span>
+                    </a>
+
+                    <a href="#taps" class="w-full sm:w-auto bg-pubCard/90 hover:bg-pubCard text-amber-200 border border-amber-500/30 font-semibold px-8 py-4 rounded-xl text-base transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-beer-mug-empty text-amber-500"></i>
+                        <span>Scopri le Birre Spina</span>
+                    </a>
+                </div>
+
+                <!-- Quick Info Bar -->
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto pt-8 border-t border-pubBorder/50 text-left">
+                    <div class="flex items-center gap-3">
+                        <div class="text-amber-500 text-xl"><i class="fa-solid fa-beer-mug-empty"></i></div>
+                        <div>
+                            <span class="block text-xs text-gray-400">Alla Spina</span>
+                            <span class="block text-sm font-bold text-amber-100">12 Vie Attive</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="text-amber-500 text-xl"><i class="fa-solid fa-burger"></i></div>
+                        <div>
+                            <span class="block text-xs text-gray-400">Cucina</span>
+                            <span class="block text-sm font-bold text-amber-100">Gourmet & Pub</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="text-amber-500 text-xl"><i class="fa-solid fa-clock"></i></div>
+                        <div>
+                            <span class="block text-xs text-gray-400">Orario</span>
+                            <span class="block text-sm font-bold text-amber-100">18:30 - 02:00</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="text-amber-500 text-xl"><i class="fa-solid fa-tv"></i></div>
+                        <div>
+                            <span class="block text-xs text-gray-400">Sport Live</span>
+                            <span class="block text-sm font-bold text-amber-100">Sky & DAZN</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- TAP LIST SECTION -->
+        <section id="taps" class="py-20 px-4 max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-amber-500 font-mono text-xs uppercase tracking-widest block mb-2">In Diretta Dai Fusti</span>
+                    <h2 class="font-brand text-3xl sm:text-5xl font-bold text-foam">Le Birre alla Spina</h2>
+                </div>
+                <p class="text-gray-400 text-sm max-w-md mt-4 md:mt-0">
+                    La nostra selezione rotante curata dai nostri mastro birrai. Filtra per stile e trova la tua pinta ideale.
+                </p>
+            </div>
+
+            <!-- Beer Filters -->
+            <div class="flex flex-wrap gap-2 mb-10 overflow-x-auto pb-2">
+                <button onclick="filterBeers('all', event)" class="filter-btn active px-5 py-2 rounded-full border border-pubBorder text-sm font-medium transition-all">Tutte</button>
+                <button onclick="filterBeers('ipa', event)" class="filter-btn px-5 py-2 rounded-full border border-pubBorder text-sm font-medium transition-all">IPA & APA</button>
+                <button onclick="filterBeers('lager', event)" class="filter-btn px-5 py-2 rounded-full border border-pubBorder text-sm font-medium transition-all">Lager & Pils</button>
+                <button onclick="filterBeers('stout', event)" class="filter-btn px-5 py-2 rounded-full border border-pubBorder text-sm font-medium transition-all">Stout & Porter</button>
+                <button onclick="filterBeers('trappist', event)" class="filter-btn px-5 py-2 rounded-full border border-pubBorder text-sm font-medium transition-all">Trappiste & Belga</button>
+            </div>
+
+            <!-- Beer Cards Grid -->
+            <div id="beer-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="beer-card pub-glass-card rounded-2xl p-6 relative border border-pubBorder hover:border-amber-500/40 transition-all group" data-category="ipa">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-400 text-[11px] font-bold tracking-wider uppercase mb-1">Via #1 • IPA</span>
+                            <h3 class="font-brand text-2xl font-bold text-amber-100 group-hover:text-amber-400 transition-colors">Hop Harvest IPA</h3>
+                        </div>
+                        <span class="text-lg font-bold text-amber-400">€ 6.50</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4 line-clamp-2">
+                        Esplosione di luppoli americani con intense note agrumate di pompelmo e resina di pino. Amaro deciso ma bilanciato.
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-pubBorder/60 text-xs text-gray-400">
+                        <span><strong class="text-amber-200">ABV:</strong> 6.8%</span>
+                        <span><strong class="text-amber-200">IBU:</strong> 55</span>
+                        <span><strong class="text-amber-200">Nazione:</strong> Italia 🇮🇹</span>
+                    </div>
+                </div>
+
+                <div class="beer-card pub-glass-card rounded-2xl p-6 relative border border-pubBorder hover:border-amber-500/40 transition-all group" data-category="lager">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-400 text-[11px] font-bold tracking-wider uppercase mb-1">Via #2 • Keller Pils</span>
+                            <h3 class="font-brand text-2xl font-bold text-amber-100 group-hover:text-amber-400 transition-colors">Bavarian Gold</h3>
+                        </div>
+                        <span class="text-lg font-bold text-amber-400">€ 5.50</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4 line-clamp-2">
+                        Pilsner tedesca non filtrata, fresca, fragrante, dal carattere erbaceo del luppolo Saaz e dal finale pulitissimo.
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-pubBorder/60 text-xs text-gray-400">
+                        <span><strong class="text-amber-200">ABV:</strong> 4.9%</span>
+                        <span><strong class="text-amber-200">IBU:</strong> 28</span>
+                        <span><strong class="text-amber-200">Nazione:</strong> Germania 🇩🇪</span>
+                    </div>
+                </div>
+
+                <div class="beer-card pub-glass-card rounded-2xl p-6 relative border border-pubBorder hover:border-amber-500/40 transition-all group" data-category="stout">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-400 text-[11px] font-bold tracking-wider uppercase mb-1">Via #3 • Imperial Stout</span>
+                            <h3 class="font-brand text-2xl font-bold text-amber-100 group-hover:text-amber-400 transition-colors">Black Velvet</h3>
+                        </div>
+                        <span class="text-lg font-bold text-amber-400">€ 7.00</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4 line-clamp-2">
+                        Scura profonda con schiuma cremosa color nocciola. Sentori avvolgenti di caffè tostato, cacao amaro e vaniglia.
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-pubBorder/60 text-xs text-gray-400">
+                        <span><strong class="text-amber-200">ABV:</strong> 8.2%</span>
+                        <span><strong class="text-amber-200">IBU:</strong> 40</span>
+                        <span><strong class="text-amber-200">Nazione:</strong> Irlanda 🇮🇪</span>
+                    </div>
+                </div>
+
+                <div class="beer-card pub-glass-card rounded-2xl p-6 relative border border-pubBorder hover:border-amber-500/40 transition-all group" data-category="trappist">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-400 text-[11px] font-bold tracking-wider uppercase mb-1">Via #4 • Belgian Tripel</span>
+                            <h3 class="font-brand text-2xl font-bold text-amber-100 group-hover:text-amber-400 transition-colors">Abbazia dei Santi</h3>
+                        </div>
+                        <span class="text-lg font-bold text-amber-400">€ 7.50</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4 line-clamp-2">
+                        Birra speciale d'ispirazione trappista. Dorata, fruttata, con note di spezie dolci, banana e un calore alcolico confortante.
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-pubBorder/60 text-xs text-gray-400">
+                        <span><strong class="text-amber-200">ABV:</strong> 8.5%</span>
+                        <span><strong class="text-amber-200">IBU:</strong> 25</span>
+                        <span><strong class="text-amber-200">Nazione:</strong> Belgio 🇧🇪</span>
+                    </div>
+                </div>
+
+                <div class="beer-card pub-glass-card rounded-2xl p-6 relative border border-pubBorder hover:border-amber-500/40 transition-all group" data-category="ipa">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-400 text-[11px] font-bold tracking-wider uppercase mb-1">Via #5 • New England IPA</span>
+                            <h3 class="font-brand text-2xl font-bold text-amber-100 group-hover:text-amber-400 transition-colors">Hazy Coast NEIPA</h3>
+                        </div>
+                        <span class="text-lg font-bold text-amber-400">€ 7.00</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4 line-clamp-2">
+                        Velata, succosa come un succo di frutta tropicale (mango, maracuja). Amaro tenue e corpo morbido come seta.
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-pubBorder/60 text-xs text-gray-400">
+                        <span><strong class="text-amber-200">ABV:</strong> 6.2%</span>
+                        <span><strong class="text-amber-200">IBU:</strong> 30</span>
+                        <span><strong class="text-amber-200">Nazione:</strong> Italia 🇮🇹</span>
+                    </div>
+                </div>
+
+                <div class="beer-card pub-glass-card rounded-2xl p-6 relative border border-pubBorder hover:border-amber-500/40 transition-all group" data-category="lager">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-400 text-[11px] font-bold tracking-wider uppercase mb-1">Via #6 • Amber Bock</span>
+                            <h3 class="font-brand text-2xl font-bold text-amber-100 group-hover:text-amber-400 transition-colors">San Crispino Bock</h3>
+                        </div>
+                        <span class="text-lg font-bold text-amber-400">€ 6.00</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4 line-clamp-2">
+                        Rossa ambrata a bassa fermentazione. Ricca di malto caramellato, crosta di pane e nocciola tostata.
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-pubBorder/60 text-xs text-gray-400">
+                        <span><strong class="text-amber-200">ABV:</strong> 6.5%</span>
+                        <span><strong class="text-amber-200">IBU:</strong> 22</span>
+                        <span><strong class="text-amber-200">Nazione:</strong> Germania 🇩🇪</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- GOURMET FOOD MENU SECTION -->
+        <section id="menu-section" class="py-20 bg-pubCard/40 border-y border-pubBorder">
+            <div class="max-w-7xl mx-auto px-4">
+                
+                <div class="text-center max-w-2xl mx-auto mb-14">
+                    <span class="text-amber-500 font-mono text-xs uppercase tracking-widest block mb-2">Gusto & Tradizione</span>
+                    <h2 class="font-brand text-3xl sm:text-5xl font-bold text-foam mb-4">La Nostra Cucina</h2>
+                    <p class="text-gray-400 text-sm">
+                        Utilizziamo solo carne di razza Marchigiana certificata, salumi locali e farine macinate a pietra per le nostre pizze a lunga lievitazione.
+                    </p>
+                </div>
+
+                <!-- Food Category Tabs -->
+                <div class="flex justify-center gap-3 mb-12 flex-wrap">
+                    <button onclick="switchFoodCategory('burgers')" id="food-tab-burgers" class="food-tab active bg-amber-600 text-pubDark font-bold px-6 py-2.5 rounded-xl text-sm transition-all shadow-md">
+                        Burger Gourmet
+                    </button>
+                    <button onclick="switchFoodCategory('pizze')" id="food-tab-pizze" class="food-tab bg-pubDark text-gray-300 border border-pubBorder font-medium px-6 py-2.5 rounded-xl text-sm transition-all hover:border-amber-500/50">
+                        Pizze Lievitazione 36h
+                    </button>
+                    <button onclick="switchFoodCategory('sfizi')" id="food-tab-sfizi" class="food-tab bg-pubDark text-gray-300 border border-pubBorder font-medium px-6 py-2.5 rounded-xl text-sm transition-all hover:border-amber-500/50">
+                        Taglieri & Fritti
+                    </button>
+                </div>
+
+                <!-- Food Items: Burgers -->
+                <div id="food-burgers" class="food-group grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="pub-glass-card p-6 rounded-2xl flex flex-col sm:flex-row gap-4 border border-pubBorder">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80" alt="Burger" class="w-full sm:w-32 h-32 object-cover rounded-xl border border-pubBorder">
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-brand text-xl font-bold text-amber-200">Il Santo Graal</h4>
+                                <span class="text-amber-400 font-bold">€ 14.50</span>
+                            </div>
+                            <p class="text-xs text-gray-300 mb-3 leading-relaxed">
+                                200g Marchigiana IGP, Caciotta dei Sibillini fusa, Bacon croccante, cipolla caramellata alla birra Stout, maionese al tartufo.
+                            </p>
+                            <span class="text-[10px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded border border-amber-500/20">Best Seller</span>
+                        </div>
+                    </div>
+
+                    <div class="pub-glass-card p-6 rounded-2xl flex flex-col sm:flex-row gap-4 border border-pubBorder">
+                        <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=400&q=80" alt="Burger" class="w-full sm:w-32 h-32 object-cover rounded-xl border border-pubBorder">
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-brand text-xl font-bold text-amber-200">Smokey Marchigiano</h4>
+                                <span class="text-amber-400 font-bold">€ 13.50</span>
+                            </div>
+                            <p class="text-xs text-gray-300 mb-3 leading-relaxed">
+                                Hamburger di Marchigiana, Provola affumicata a legna, pomodori secchi marchigiani, rucola selvatica e salsa BBQ artigianale.
+                            </p>
+                            <span class="text-[10px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded border border-amber-500/20">Affumicato</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Food Items: Pizze -->
+                <div id="food-pizze" class="food-group hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="pub-glass-card p-6 rounded-2xl flex flex-col sm:flex-row gap-4 border border-pubBorder">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80" alt="Pizza" class="w-full sm:w-32 h-32 object-cover rounded-xl border border-pubBorder">
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-brand text-xl font-bold text-amber-200">Pizza I Santi</h4>
+                                <span class="text-amber-400 font-bold">€ 12.00</span>
+                            </div>
+                            <p class="text-xs text-gray-300 mb-3 leading-relaxed">
+                                Fiordilatte locale, Ciauscolo IGP sbriciolato all'uscita, stracchino cremoso e rosmarino fresco dell'orto.
+                            </p>
+                            <span class="text-[10px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded border border-amber-500/20">Specialità Marchigiana</span>
+                        </div>
+                    </div>
+
+                    <div class="pub-glass-card p-6 rounded-2xl flex flex-col sm:flex-row gap-4 border border-pubBorder">
+                        <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=400&q=80" alt="Pizza" class="w-full sm:w-32 h-32 object-cover rounded-xl border border-pubBorder">
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-brand text-xl font-bold text-amber-200">Diavola Artigianale</h4>
+                                <span class="text-amber-400 font-bold">€ 10.50</span>
+                            </div>
+                            <p class="text-xs text-gray-300 mb-3 leading-relaxed">
+                                Pomodoro San Marzano DOP, mozzarella di bufala, ventricina piccante e olio al peperoncino biologico.
+                            </p>
+                            <span class="text-[10px] bg-red-500/10 text-red-400 px-2 py-0.5 rounded border border-red-500/20">Piccante</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Food Items: Sfizi -->
+                <div id="food-sfizi" class="food-group hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="pub-glass-card p-6 rounded-2xl flex flex-col sm:flex-row gap-4 border border-pubBorder">
+                        <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=400&q=80" alt="Fritti" class="w-full sm:w-32 h-32 object-cover rounded-xl border border-pubBorder">
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-brand text-xl font-bold text-amber-200">Gran Mix Fritti I Santi</h4>
+                                <span class="text-amber-400 font-bold">€ 11.00</span>
+                            </div>
+                            <p class="text-xs text-gray-300 mb-3 leading-relaxed">
+                                Olive all'Ascolana fatte in casa, cremini fritti tradizionali, anelli di cipolla alla pastella di IPA.
+                            </p>
+                            <span class="text-[10px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded border border-amber-500/20">Ideale per 2 Persone</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CHI SIAMO / LA NOSTRA FILOSOFIA -->
+        <section id="chi-siamo" class="py-20 px-4 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1575444758702-4a6b9222336e?auto=format&fit=crop&w=800&q=80" alt="Locale Interno" class="rounded-3xl border border-pubBorder shadow-2xl w-full h-[400px] object-cover">
+                    <div class="absolute -bottom-6 -right-6 bg-amber-600 text-pubDark p-6 rounded-2xl font-bold hidden sm:block shadow-xl">
+                        <span class="block text-3xl font-brand">100%</span>
+                        <span class="text-xs uppercase tracking-wider">Passione Artigianale</span>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="text-amber-500 font-mono text-xs uppercase tracking-widest block mb-2">Dal Cuore Delle Marche</span>
+                    <h2 class="font-brand text-3xl sm:text-5xl font-bold text-foam mb-6 leading-tight">
+                        La Nostra Filosofia
+                    </h2>
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed mb-6">
+                        Nati dalla passione per la fermentazione di qualità e l'ospitalità autentica, <strong>I Santi Birreria</strong> rappresenta il punto di incontro ideale tra il fascino dei tipici pub del nord Europa ed i sapori schietti del nostro territorio marchigiano.
+                    </p>
+                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                        Ogni fusto agganciato al nostro impianto di spillatura a 12 vie viene selezionato con cura maniacale. Dalle IPA luppolate a freddo alle birre trappiste ad alta gradazione, per arrivare ai nostri ingredienti a Km 0 scelti direttamente dai produttori locali.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- EVENTS & LIVE SPORTS SECTION -->
+        <section id="eventi" class="py-20 px-4 max-w-7xl mx-auto border-t border-pubBorder">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div>
+                    <span class="text-amber-500 font-mono text-xs uppercase tracking-widest block mb-2">Serate & Intrattenimento</span>
+                    <h2 class="font-brand text-3xl sm:text-5xl font-bold text-foam mb-6 leading-tight">
+                        Non Solo Buona Birra. <br>
+                        <span class="text-amber-500">Vivi l'Atmosfera.</span>
+                    </h2>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-8">
+                        Da I Santi la serata non finisce mai con il cibo. Trasmettiamo le migliori partite della Serie A e Champions League su maxi-schermi HD ed organizziamo serate di musica acustica live e degustazioni guidate.
+                    </p>
+
+                    <!-- Schedule List -->
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-xl bg-pubCard border border-pubBorder flex items-center gap-4">
+                            <div class="text-center px-3 py-1 bg-amber-600/20 rounded-lg border border-amber-500/30 text-amber-400 font-bold min-w-[65px]">
+                                <span class="block text-xs uppercase">MER</span>
+                                <span class="text-lg">21:00</span>
+                            </div>
+                            <div>
+                                <h5 class="text-sm font-bold text-amber-100">Champions League Live</h5>
+                                <span class="text-xs text-gray-400">Proiezione HD con promozione 2 Pinte + Tagliere</span>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-pubCard border border-pubBorder flex items-center gap-4">
+                            <div class="text-center px-3 py-1 bg-amber-600/20 rounded-lg border border-amber-500/30 text-amber-400 font-bold min-w-[65px]">
+                                <span class="block text-xs uppercase">VEN</span>
+                                <span class="text-lg">22:00</span>
+                            </div>
+                            <div>
+                                <h5 class="text-sm font-bold text-amber-100">Acoustic Pub Night</h5>
+                                <span class="text-xs text-gray-400">Live set di musica folk & rock acustico</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Events Visual Container -->
+                <div class="relative">
+                    <div class="rounded-3xl overflow-hidden border border-amber-500/30 shadow-2xl relative">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" alt="Live Events" class="w-full h-[420px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-pubDark via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 p-6 bg-pubDark/90 backdrop-blur-md rounded-2xl border border-pubBorder">
+                            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider block mb-1"><i class="fa-solid fa-star"></i> Evento Speciale</span>
+                            <h4 class="font-brand text-xl font-bold text-foam">Tap Takeover: Birrifici Marchigiani</h4>
+                            <p class="text-xs text-gray-300 mt-1">Una serata dedicata ai mastro birrai del territorio con 8 vie dedicate.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FOOTER & LOCATION -->
+        <footer id="contatti" class="bg-pubCard border-t border-pubBorder py-16 px-4">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+                
+                <!-- Col 1: About -->
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-pubDark font-bold text-sm">
+                            <i class="fa-solid fa-beer-mug-empty"></i>
+                        </div>
+                        <span class="font-brand text-lg font-bold text-amber-500">I SANTI BIRRERIA</span>
+                    </div>
+                    <p class="text-xs text-gray-400 leading-relaxed mb-4">
+                        Il punto di riferimento a Porto Sant'Elpidio per gli amanti della buona birra e del cibo di qualità.
+                    </p>
+                    <div class="flex gap-4 text-gray-400">
+                        <a href="https://www.instagram.com" target="_blank" class="hover:text-amber-400 transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
+                        <a href="https://www.facebook.com" target="_blank" class="hover:text-amber-400 transition-colors"><i class="fa-brands fa-facebook text-xl"></i></a>
+                        <a href="https://www.tiktok.com" target="_blank" class="hover:text-amber-400 transition-colors"><i class="fa-brands fa-tiktok text-xl"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Hours -->
+                <div>
+                    <h4 class="font-brand text-sm font-bold text-amber-200 uppercase tracking-wider mb-4">Orari di Apertura</h4>
+                    <ul class="text-xs text-gray-400 space-y-2">
+                        <li class="flex justify-between"><span>Lunedì:</span> <span class="text-gray-500">Chiuso</span></li>
+                        <li class="flex justify-between"><span>Martedì - Giovedì:</span> <span>18:30 - 01:30</span></li>
+                        <li class="flex justify-between"><span>Venerdì - Sabato:</span> <span>18:30 - 02:30</span></li>
+                        <li class="flex justify-between"><span>Domenica:</span> <span>18:00 - 01:30</span></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contacts -->
+                <div>
+                    <h4 class="font-brand text-sm font-bold text-amber-200 uppercase tracking-wider mb-4">Dove Siamo & Contatti</h4>
+                    <ul class="text-xs text-gray-400 space-y-3">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot text-amber-500 mt-0.5"></i>
+                            <div>
+                                <span>Via Umberto I, Porto Sant'Elpidio (FM), Italia</span>
+                                <a href="https://maps.google.com" target="_blank" class="block text-amber-400 hover:underline mt-1 font-semibold">Apri su Google Maps</a>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-amber-500"></i>
+                            <a href="tel:+390734902181" class="hover:text-amber-400 font-bold text-amber-100">+39 0734 902181</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-amber-500"></i>
+                            <span>info@isantibirreria.it</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="max-w-7xl mx-auto pt-8 border-t border-pubBorder/60 text-center text-[11px] text-gray-500">
+                <p>© 2026 I Santi Birreria • Porto Sant'Elpidio (FM). Tutti i diritti riservati.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('hidden');
+            if(menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            }
+        }
+
+        // Beer Tap Filter Functionality
+        function filterBeers(category, event) {
+            const cards = document.querySelectorAll('.beer-card');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+
+            filterBtns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Food Category Switcher
+        function switchFoodCategory(category) {
+            const groups = document.querySelectorAll('.food-group');
+            const tabs = document.querySelectorAll('.food-tab');
+
+            groups.forEach(g => g.classList.add('hidden'));
+            tabs.forEach(t => {
+                t.classList.remove('active', 'bg-amber-600', 'text-pubDark');
+                t.classList.add('bg-pubDark', 'text-gray-300');
+            });
+
+            document.getElementById(`food-${category}`).classList.remove('hidden');
+            
+            const activeTab = document.getElementById(`food-tab-${category}`);
+            activeTab.classList.add('active', 'bg-amber-600', 'text-pubDark');
+            activeTab.classList.remove('bg-pubDark', 'text-gray-300');
+        }
+    </script>
+</body>
+</html>
